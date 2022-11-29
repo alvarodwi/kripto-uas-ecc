@@ -1,5 +1,5 @@
 <template>
-  <h1>Elliptic Curve Cryptography</h1>
+  <h1 class="text-xl">Elliptic Curve Cryptography</h1>
 
   <p>
     ECC merupakan sebuah pendekatan public-key cryptography yang memanfaatkan

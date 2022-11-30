@@ -1,14 +1,14 @@
 <template>
-  <h1 class="text-xl">Elliptic Curve Cryptography</h1>
+  <h1 class="mt-4 text-3xl font-bold">Elliptic Curve Cryptography</h1>
 
-  <p>
+  <p class="mt-3">
     ECC merupakan sebuah pendekatan public-key cryptography yang memanfaatkan
     struktur aljabar dari kurva eliptik pada finite field.
   </p>
 
   <p>
     Kurva eliptik sendiri adalah kurva dengan bentuk umum persamaan :
-    <p>y^2 = x^3 + ax + b</p>
+    <p class="my-3 ml-16">y^2 = x^3 + ax + b</p>
   </p>
 
   <p>
@@ -17,7 +17,5 @@
     dikatakan bahwa algoritma ini lebih kuat.
   </p>
 
-  <p>
-    <em> “One of the most powerful, but least understood in use today” </em>
-  </p>
+  <p class="mt-4 italic font-semibold"> “One of the most powerful, but least understood in use today” </p>
 </template>

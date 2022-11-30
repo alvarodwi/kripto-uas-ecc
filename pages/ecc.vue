@@ -1,7 +1,7 @@
 <template>
-  <h1>ECC Calculator</h1>
+  <h1 class="mt-4 text-3xl font-bold">ECC Calculator</h1>
 
-  <p>
+  <p class="mt-3">
     Elliptic Curve Cryptography merupakan kriptografi asimetris, yang
     membutuhkan 2 kunci
   </p>
@@ -10,13 +10,11 @@
     proses enkripsi dan dekripsinya bisa dilakukan seperti di-bawah ini :
   </p>
 
-  <h3>Enkripsi</h3>
+  <h3 class="mt-4 mb-1 text-lg font-bold">Enkripsi</h3>
 
   <p>Enkripsi ECC membutuhkan kunci <i>q</i> dan <i>r</i></p>
 
-  <hr />
-
-  <h3>Dekripsi</h3>
+  <h3 class="mt-4 mb-1 text-lg font-bold">Dekripsi</h3>
 
   <p>Dekripsi ECC membutuhkan kunci <i>r</i> saja</p>
 </template>

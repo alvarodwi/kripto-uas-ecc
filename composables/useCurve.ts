@@ -3,8 +3,8 @@ export const useCurve = () =>
     "curve",
     () =>
       <Curve>{
-        p: 1,
+        p: 13,
         a: 1,
-        b: 1,
+        b: 0,
       }
   );

@@ -106,38 +106,30 @@
         <!-- kalkulator -->
         <div class="mt-3 border-t">
           <h2 class="mt-3 text-3xl font-bold">Kalkulator P + Q</h2>
-          <div class="flex flex-row w-full mt-2">
-            <div class="w-1/3">
-              <!-- form kalkulator -->
-              <div class="my-1 grow">
-                <label class="mr-2">P =</label>
-                <select v-model="p">
-                  <option v-for="alpha in alphas" :value="alpha">
-                    ({{ alpha.x }}, {{ alpha.y }})
-                  </option>
-                </select>
-              </div>
-              <div class="my-1 grow">
-                <label class="mr-2">Q =</label>
-                <select v-model="q">
-                  <option v-for="alpha in alphas" :value="alpha">
-                    ({{ alpha.x }}, {{ alpha.y }})
-                  </option>
-                </select>
-              </div>
-            </div>
-            <!-- output kalkulator -->
-            <div class="w-2/3">
-              <div class="my-2 grow">
-                <label class="mr-2">P + Q = </label>
-                <input
-                  class="px-4 py-2 m-0 text-sm font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-900 focus:bg-white focus:border-green-600 focus:outline-none"
-                  type="text"
-                  :value="printPoint(curveAddition(p, q))"
-                  readonly
-                />
-              </div>
-            </div>
+          <div class="my-1 grow">
+            <label class="mr-2">P =</label>
+            <select v-model="p">
+              <option v-for="alpha in alphas" :value="alpha">
+                ({{ alpha.x }}, {{ alpha.y }})
+              </option>
+            </select>
+          </div>
+          <div class="my-1 grow">
+            <label class="mr-2">Q =</label>
+            <select v-model="q">
+              <option v-for="alpha in alphas" :value="alpha">
+                ({{ alpha.x }}, {{ alpha.y }})
+              </option>
+            </select>
+          </div>
+          <div class="my-2 grow">
+            <label class="mr-2">P + Q = </label>
+            <input
+              class="px-4 py-2 m-0 text-sm font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-900 focus:bg-white focus:border-green-600 focus:outline-none"
+              type="text"
+              :value="printPoint(curveAddition(p, q))"
+              readonly
+            />
           </div>
         </div>
       </div>
@@ -154,8 +146,6 @@ const tableData: Ref<EllipticCurveData[]> = ref([]);
 const alphas: Ref<Point[]> = ref([]);
 const p: Ref<Point> = ref(<Point>{});
 const q: Ref<Point> = ref(<Point>{});
-
-const printPoint = (p: Point) => `(${p.x}, ${p.y})`;
 
 function generate() {
   tableData.value = generateTable(curve.value);

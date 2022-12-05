@@ -6,8 +6,11 @@
     <NuxtLink to="/table" class="px-4 hover:underline n-link-base"
       >Table</NuxtLink
     >
-    <NuxtLink to="/crypt" class="px-4 hover:underline n-link-base">
-      Crypt
+    <NuxtLink to="/encrypt" class="px-4 hover:underline n-link-base">
+      Encrypt
+    </NuxtLink>
+    <NuxtLink to="/decrypt" class="px-4 hover:underline n-link-base">
+      Decrypt
     </NuxtLink>
   </nav>
 </template>

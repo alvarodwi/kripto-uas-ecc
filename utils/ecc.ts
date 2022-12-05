@@ -1,7 +1,9 @@
 import { create, all } from "mathjs";
 
-const math = create(all);
+export const math = create(all);
 const curve = useCurve();
+
+export const printPoint = (p: Point) => `(${p.x}, ${p.y})`;
 
 export function invmod(a: number, b: number) {
   a = math.mod(a, b);
@@ -42,6 +44,14 @@ export function curveAddition(p: Point, q: Point): Point {
     x: x3,
     y: y3,
   };
+}
+
+export function nCurveAddition(n: number, c: Point): Point {
+  let temp: Point = c;
+  for (let i = 1; i < n; i++) {
+    temp = curveAddition(temp, c);
+  }
+  return temp;
 }
 
 export function generateTable(curve: Curve): EllipticCurveData[] {

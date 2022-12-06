@@ -19,11 +19,10 @@ export function invmod(a: number, b: number) {
 
 export function curveAddition(p: Point, q: Point): Point {
   let lambda = 0;
-  let a = 1;
 
   if (p.x === q.x && p.y === q.y) {
     let quantifier = math.mod(
-      math.evaluate(`3*${p.x}^2 + ${a}`),
+      math.evaluate(`3*${p.x}^2 + ${curve.value.a}`),
       curve.value.p
     );
     let divider = invmod(math.evaluate(`2*${p.y}`), curve.value.p);
@@ -52,6 +51,20 @@ export function nCurveAddition(n: number, c: Point): Point {
     temp = curveAddition(temp, c);
   }
   return temp;
+}
+
+export function curveSubtract(p: Point, q: Point): Point {
+  console.log(
+    "test",
+    -q.y,
+    invmod(-q.y, curve.value.p),
+    math.mod(-q.y, curve.value.p)
+  );
+  q.y = math.mod(-q.y, curve.value.p);
+
+  console.log("test", q.x, q.y);
+
+  return curveAddition(p, q);
 }
 
 export function generateTable(curve: Curve): EllipticCurveData[] {

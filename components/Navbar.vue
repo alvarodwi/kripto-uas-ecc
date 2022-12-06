@@ -12,5 +12,8 @@
     <NuxtLink to="/decrypt" class="px-4 hover:underline n-link-base">
       Decrypt
     </NuxtLink>
+    <NuxtLink to="/tool" class="px-4 hover:underline n-link-base">
+      Tools
+    </NuxtLink>
   </nav>
 </template>

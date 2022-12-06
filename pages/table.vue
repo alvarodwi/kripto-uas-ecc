@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-row p-4">
+  <div class="flex flex-row w-3/4 p-4 mx-auto">
     <!-- tabel -->
-    <div class="w-1/2 mr-4">
+    <div class="w-2/3 mr-4">
       <h1 class="mt-4 text-3xl font-bold">ECC Table Generator</h1>
 
       <p class="mt-3">
@@ -25,24 +25,25 @@
       >
         Reset
       </button>
-      <table class="my-1">
-        <thead class="border-b">
+      <table class="my-1 mb-4 border">
+        <thead class="text-sm border-b">
           <tr>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">x</th>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">
-              x^3 + {{ curve.a ? (curve.a === 1 ? "" : curve.a) : "a" }}x +
-              {{ curve.b ? curve.b : "b" }}
+            <th class="px-6 py-4 text-left text-gray-900">
+              <i>x</i>
             </th>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">
-              mod {{ curve.p ? curve.p : "p" }}
+            <th class="px-6 py-4 text-left text-gray-900">
+              <MathJax :latex="xFormula(curve)"></MathJax>
             </th>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">
-              R^(p-1)/2 === 1 mod p
+            <th class="px-6 py-4 text-left text-gray-900">
+              <MathJax :latex="mFormula(curve)"></MathJax>
             </th>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">
+            <th class="px-6 py-4 text-left text-gray-900">
+              <MathJax :latex="rFormula"></MathJax>
+            </th>
+            <th class="px-6 py-4 text-left text-gray-900">
               QR({{ curve.p ? curve.p : "p" }})
             </th>
-            <th class="px-6 py-4 font-medium text-left text-gray-900">y</th>
+            <th class="px-6 py-4 text-left text-gray-900"><i>y</i></th>
           </tr>
         </thead>
         <tbody>
@@ -77,11 +78,11 @@
       </table>
     </div>
     <!-- alpha -->
-    <div class="w-1/2 pl-4 border-l" v-if="alphas.length > 0">
-      <h1 class="mt-4 text-3xl font-bold">Kurva Eliptik</h1>
+    <div class="w-1/3 pl-4 border-l" v-if="alphas.length > 0">
+      <h1 class="mt-4 text-3xl font-bold">Possible α</h1>
 
       <p class="mt-3">
-        Dari tabel disamping, kita bisa mengambang nilai <i>a</i> sembarang dari
+        Dari tabel disamping, kita bisa mengambil nilai α sembarang dari
         titik-titik yang ada pada kurva elliptik, yaitu :
       </p>
       <ul class="grid grid-flow-col grid-rows-4 mb-8 w-fit">
@@ -89,69 +90,30 @@
           ({{ alpha.x }}, {{ alpha.y }})
         </li>
       </ul>
-
-      <div class="mt-4">
-        <p>
-          Selain itu, dalam ECC kita juga akan melakukan penjumlahan titik dalam
-          kurva, yang bisa dikerjakan melalui rumus berikut :
-        </p>
-        <p>misal P(x1,y1) dan Q(x2,y2) merupakan titik dalam kurva</p>
-        <p>P + Q =</p>
-        <p>x3 = λ^2 - x1 -x2</p>
-        <p>y3 = λ(x1 - x3) - y1</p>
-        <p>λ =</p>
-        <p>(y2 - y1)/(x2 - x1) untuk P != Q</p>
-        <p>(3x1^2 + a)/2y1 untuk P = Q</p>
-
-        <!-- kalkulator -->
-        <div class="mt-3 border-t">
-          <h2 class="mt-3 text-3xl font-bold">Kalkulator P + Q</h2>
-          <div class="my-1 grow">
-            <label class="mr-2">P =</label>
-            <select v-model="p">
-              <option v-for="alpha in alphas" :value="alpha">
-                ({{ alpha.x }}, {{ alpha.y }})
-              </option>
-            </select>
-          </div>
-          <div class="my-1 grow">
-            <label class="mr-2">Q =</label>
-            <select v-model="q">
-              <option v-for="alpha in alphas" :value="alpha">
-                ({{ alpha.x }}, {{ alpha.y }})
-              </option>
-            </select>
-          </div>
-          <div class="my-2 grow">
-            <label class="mr-2">P + Q = </label>
-            <input
-              class="px-4 py-2 m-0 text-sm font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-900 focus:bg-white focus:border-green-600 focus:outline-none"
-              type="text"
-              :value="printPoint(curveAddition(p, q))"
-              readonly
-            />
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Ref } from "vue";
+import { MathJax } from "mathjax-vue3";
+
+// latex untuk tabel
+const xFormula = (curve: Curve) =>
+  `$$x^3 + ${curve.a ? (curve.a === 1 ? "" : curve.a) : "a"}x + ${
+    curve.b ? curve.b : "b"
+  }$$`;
+const rFormula = "$$R^{(p-1)/2} \\equiv 1 \\bmod p $$";
+const mFormula = (curve: Curve) => `$$\\pmod {${curve.p ?? "p"}} $$`;
 
 const curve = useCurve();
 
 const tableData: Ref<EllipticCurveData[]> = ref([]);
 const alphas: Ref<Point[]> = ref([]);
-const p: Ref<Point> = ref(<Point>{});
-const q: Ref<Point> = ref(<Point>{});
 
 function generate() {
   tableData.value = generateTable(curve.value);
   alphas.value = generateAlpha(tableData.value);
-  p.value = alphas.value[0];
-  q.value = alphas.value[0];
 }
 
 function reset() {

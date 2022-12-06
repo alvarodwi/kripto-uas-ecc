@@ -85,7 +85,7 @@
         Dari tabel disamping, kita bisa mengambil nilai α sembarang dari
         titik-titik yang ada pada kurva elliptik, yaitu :
       </p>
-      <ul class="grid grid-flow-col grid-rows-4 mb-8 w-fit">
+      <ul class="grid grid-rows-4 grid-cols-4 mb-8 w-fit">
         <li v-for="alpha in alphas" class="p-2">
           ({{ alpha.x }}, {{ alpha.y }})
         </li>

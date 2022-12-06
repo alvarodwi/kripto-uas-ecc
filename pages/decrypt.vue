@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 p-4 mx-auto mt-4">
+  <div class="w-1/2 mx-auto mt-4">
     <h1 class="mt-4 text-3xl font-bold">ECC Decrypt</h1>
 
     <p class="mt-3">

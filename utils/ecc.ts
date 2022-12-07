@@ -54,15 +54,7 @@ export function nCurveAddition(n: number, c: Point): Point {
 }
 
 export function curveSubtract(p: Point, q: Point): Point {
-  console.log(
-    "test",
-    -q.y,
-    invmod(-q.y, curve.value.p),
-    math.mod(-q.y, curve.value.p)
-  );
   q.y = math.mod(-q.y, curve.value.p);
-
-  console.log("test", q.x, q.y);
 
   return curveAddition(p, q);
 }
